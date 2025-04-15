@@ -22,9 +22,14 @@ def login():
     password = data.get("password")
 
     if username and password:
-        # Login 
-        pass
+        # Login
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.password == password:
+                return jsonify({"message": "Autenticacao realizada com sucesso"})
+
     return jsonify({"message": "Credencias invalidas"}), 400
+    
 
 
 @app.route("/hello-world", methods=["GET"])
